@@ -10,6 +10,28 @@ class Petshop extends StatelessWidget {
         appBar: AppBar(
           title: Text('Petshop'),
         ),
+        body: SizedBox(
+          width: double.infinity,
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Gatito SA',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  Text(
+                    'Ração',
+                    style: TextStyle(fontSize: 16),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
