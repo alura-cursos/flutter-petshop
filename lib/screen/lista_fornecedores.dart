@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:petshop/http/fornecedores_webclient.dart';
 import 'package:petshop/model/fornecedor.dart';
 
 class ListaFornecedores extends StatelessWidget {
@@ -7,9 +8,7 @@ class ListaFornecedores extends StatelessWidget {
   final List<Fornecedor> fornecedores = List();
 
   ListaFornecedores(){
-    fornecedores.add(Fornecedor('Gatitos SA', 'Ração'));
-    fornecedores.add(Fornecedor('Catiorros', 'Higiene'));
-    fornecedores.add(Fornecedor('Peixinhos', 'Aquários'));
+    FornecedoresWebclient().buscaTodos();
   }
 
   @override

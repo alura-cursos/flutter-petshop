@@ -3,8 +3,12 @@ class Fornecedor {
   final String categoria;
 
   Fornecedor(
-      this.empresa,
-      this.categoria,
-      );
+    this.empresa,
+    this.categoria,
+  );
 
+  @override
+  String toString() {
+    return 'Fornecedor{empresa: $empresa, categoria: $categoria}';
+  }
 }
