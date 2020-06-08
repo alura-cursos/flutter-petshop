@@ -1,7 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:petshop/model/fornecedor.dart';
 
-class FormularioFornecedor extends StatelessWidget {
+class FormularioFornecedor extends StatefulWidget {
+  @override
+  _FormularioFornecedorState createState() => _FormularioFornecedorState();
+}
+
+class _FormularioFornecedorState extends State<FormularioFornecedor> {
+  final TextEditingController _campoEmpresaController = TextEditingController();
+  final TextEditingController _campoCategoriaController =
+      TextEditingController();
+  final TextEditingController _campoEmailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,16 +29,19 @@ class FormularioFornecedor extends StatelessWidget {
               decoration: InputDecoration(
                 labelText: 'Empresa',
               ),
+              controller: _campoEmpresaController,
             ),
             TextField(
               decoration: InputDecoration(
                 labelText: 'Categoria',
               ),
+              controller: _campoCategoriaController,
             ),
             TextField(
               decoration: InputDecoration(
                 labelText: 'E-mail',
               ),
+              controller: _campoEmailController,
               keyboardType: TextInputType.emailAddress,
             ),
             Padding(
@@ -36,7 +50,13 @@ class FormularioFornecedor extends StatelessWidget {
                 width: double.infinity,
                 child: RaisedButton(
                   child: Text('Salvar'),
-                  onPressed: () {},
+                  onPressed: () {
+                    var empresa = _campoEmpresaController.text;
+                    var categoria = _campoEmpresaController.text;
+                    var email = _campoEmpresaController.text;
+                    Fornecedor fornecedor = Fornecedor(empresa, categoria, email,);
+                    print(fornecedor);
+                  },
                 ),
               ),
             )
