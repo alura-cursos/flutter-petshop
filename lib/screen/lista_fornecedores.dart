@@ -1,14 +1,25 @@
-
 import 'package:flutter/material.dart';
 import 'package:petshop/http/fornecedores_webclient.dart';
 import 'package:petshop/model/fornecedor.dart';
 
-class ListaFornecedores extends StatelessWidget {
+class ListaFornecedores extends StatefulWidget {
 
+  @override
+  _ListaFornecedoresState createState() => _ListaFornecedoresState();
+}
+
+class _ListaFornecedoresState extends State<ListaFornecedores> {
   final List<Fornecedor> fornecedores = List();
 
-  ListaFornecedores(){
-    FornecedoresWebclient().buscaTodos();
+  _ListaFornecedoresState(){
+    FornecedoresWebclient().buscaTodos().then(
+          (fornecedoresRecebidos) {
+        fornecedores.clear();
+        setState(() {
+          fornecedores.addAll(fornecedoresRecebidos);
+        });
+      },
+    );
   }
 
   @override
@@ -26,7 +37,6 @@ class ListaFornecedores extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class FornecedorCard extends StatelessWidget {
