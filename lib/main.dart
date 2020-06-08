@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petshop/screen/formulario_fornecedor.dart';
 
 import 'screen/lista_fornecedores.dart';
 
@@ -9,7 +10,7 @@ class Petshop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ListaFornecedores(),
+      home: FormularioFornecedor(),
     );
   }
 }
