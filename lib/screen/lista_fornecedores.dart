@@ -12,7 +12,11 @@ class _ListaFornecedoresState extends State<ListaFornecedores> {
   final List<Fornecedor> fornecedores = List();
 
   _ListaFornecedoresState(){
-    FornecedoresWebclient().buscaTodos().then(
+    _buscaTodos();
+  }
+
+  Future<void> _buscaTodos() {
+    return FornecedoresWebclient().buscaTodos().then(
           (fornecedoresRecebidos) {
         fornecedores.clear();
         setState(() {
@@ -28,12 +32,17 @@ class _ListaFornecedoresState extends State<ListaFornecedores> {
       appBar: AppBar(
         title: Text('Petshop'),
       ),
-      body: ListView.builder(
-        itemCount: fornecedores.length,
-        itemBuilder: (context, posicao) {
-          Fornecedor fornecedor = fornecedores[posicao];
-          return FornecedorCard(fornecedor);
+      body: RefreshIndicator(
+        onRefresh: () {
+          return _buscaTodos();
         },
+        child: ListView.builder(
+          itemCount: fornecedores.length,
+          itemBuilder: (context, posicao) {
+            Fornecedor fornecedor = fornecedores[posicao];
+            return FornecedorCard(fornecedor);
+          },
+        ),
       ),
     );
   }
