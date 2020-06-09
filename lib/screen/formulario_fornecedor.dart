@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:petshop/http/fornecedores_webclient.dart';
 import 'package:petshop/model/fornecedor.dart';
 
 class FormularioFornecedor extends StatefulWidget {
@@ -8,6 +9,7 @@ class FormularioFornecedor extends StatefulWidget {
 }
 
 class _FormularioFornecedorState extends State<FormularioFornecedor> {
+
   final TextEditingController _campoEmpresaController = TextEditingController();
   final TextEditingController _campoCategoriaController =
       TextEditingController();
@@ -51,11 +53,7 @@ class _FormularioFornecedorState extends State<FormularioFornecedor> {
                 child: RaisedButton(
                   child: Text('Salvar'),
                   onPressed: () {
-                    var empresa = _campoEmpresaController.text;
-                    var categoria = _campoEmpresaController.text;
-                    var email = _campoEmpresaController.text;
-                    Fornecedor fornecedor = Fornecedor(empresa, categoria, email,);
-                    print(fornecedor);
+                    _salva();
                   },
                 ),
               ),
@@ -64,5 +62,17 @@ class _FormularioFornecedorState extends State<FormularioFornecedor> {
         ),
       ),
     );
+  }
+
+  void _salva() async {
+    var empresa = _campoEmpresaController.text;
+    var categoria = _campoCategoriaController.text;
+    var email = _campoEmailController.text;
+    Fornecedor fornecedor = Fornecedor(empresa, categoria, email,);
+    if(await FornecedoresWebclient().salva(fornecedor)){
+      print('fornecedor salvo');
+      return;
+    }
+    print('não foi possível salvar o fornecedor');
   }
 }
