@@ -70,9 +70,7 @@ class _FormularioFornecedorState extends State<FormularioFornecedor> {
     var email = _campoEmailController.text;
     Fornecedor fornecedor = Fornecedor(empresa, categoria, email,);
     if(await FornecedoresWebclient().salva(fornecedor)){
-      print('fornecedor salvo');
-      return;
+      Navigator.pop(context, true);
     }
-    print('não foi possível salvar o fornecedor');
   }
 }

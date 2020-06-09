@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:petshop/http/fornecedores_webclient.dart';
 import 'package:petshop/model/fornecedor.dart';
+import 'package:petshop/screen/formulario_fornecedor.dart';
 
 class ListaFornecedores extends StatefulWidget {
-
   @override
   _ListaFornecedoresState createState() => _ListaFornecedoresState();
 }
@@ -11,13 +11,13 @@ class ListaFornecedores extends StatefulWidget {
 class _ListaFornecedoresState extends State<ListaFornecedores> {
   final List<Fornecedor> fornecedores = List();
 
-  _ListaFornecedoresState(){
+  _ListaFornecedoresState() {
     _buscaTodos();
   }
 
   Future<void> _buscaTodos() {
     return FornecedoresWebclient().buscaTodos().then(
-          (fornecedoresRecebidos) {
+      (fornecedoresRecebidos) {
         fornecedores.clear();
         setState(() {
           fornecedores.addAll(fornecedoresRecebidos);
@@ -30,7 +30,7 @@ class _ListaFornecedoresState extends State<ListaFornecedores> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Petshop'),
+        title: Text('Fornecedores'),
       ),
       body: RefreshIndicator(
         onRefresh: () {
@@ -44,7 +44,27 @@ class _ListaFornecedoresState extends State<ListaFornecedores> {
           },
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          _vaiParaFormulario(context);
+        },
+      ),
     );
+  }
+
+  void _vaiParaFormulario(BuildContext context) async {
+    bool precisaAtualizar = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => FormularioFornecedor(),
+      ),
+    );
+    if (precisaAtualizar) {
+      setState(() {
+        _buscaTodos();
+      });
+    }
   }
 }
 
