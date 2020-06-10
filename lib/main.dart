@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'screen/lista_fornecedores.dart';
+import 'package:petshop/screen/lista_fornecedores.dart';
 
 void main() => runApp(Petshop());
 
